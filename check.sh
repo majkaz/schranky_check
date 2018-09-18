@@ -10,7 +10,8 @@ echo
 if [ $# -eq 0 ]
 	then
 	files=( POST_SCHRANKY_*.csv )
-	old=${files[0]}
+	old=${files[${#files[@]}-2]}
+	#old=${files[0]}
 	new=${files[${#files[@]}-1]}
 elif [ $# -eq 2 ]
 	then
