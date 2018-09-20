@@ -1,0 +1,19 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: check changed ref > ungroup ref
+desc: ""
+type: :feature
+component: schr
+release: 
+reporter: majkaz <majka.zem+git@gmail.com>
+claimer: 
+status: :unstarted
+disposition: 
+creation_time: 2018-09-21 00:16:49.451660 Z
+references: []
+
+id: 53cbfec23b866dff34ba311609af2075cdc87de6
+log_events: 
+- - 2018-09-21 00:16:49.451660 Z
+  - majkaz <majka.zem+git@gmail.com>
+  - created
+  - ""

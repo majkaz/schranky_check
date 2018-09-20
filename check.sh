@@ -37,8 +37,6 @@ echo "Změny u depa pošty:"
 echo "--------------------------------------"
 diff -u <(awk -F";" '!seen[$1";"$2]++ { print $1";"$2}' $old | sort -V) <(awk -F";" '!seen[$1";"$2]++ { print $1";"$2}' $new | sort -V) | \grep "^+\|^-"| sed 's/./& /;2d;1d' | tee Změny_depa.txt | tr ';' '\t'
 
-#num_of_lines=$(< "Změny_depa.txt" wc -l)
-
 	if (( $(< "Změny_depa.txt" wc -l) > 0 ))
 	then
 		echo "--------------------------------------"
@@ -71,6 +69,7 @@ sed '1cpsc;zkrnaz_posty;cis_schranky;adresa;sour_x;sour_y;misto_popis;cast_obce;
 sed '1cpsc;zkrnaz_posty;cis_schranky;adresa;sour_x;sour_y;misto_popis;cast_obce;obec;okres;cas;omezeni - omezeni' $new | ./collection_times.sh | sed 's/ @/;/'  > tmp_new_CT.csv
 
 join -t";" -j 1 <(awk -F";" '{ print $1":"$3";"$11}' tmp_old_CT.csv | sort ) <(awk -F";" '{ print $1":"$3";"$11}' tmp_new_CT.csv | sort) | awk -F";" '$2!=$3' > Změny_doba_výběru.txt
+#TODO: parse collection_times
 
 echo "Změna doby výběru schránky:"
 echo "--------------------------------------"
@@ -97,7 +96,7 @@ wc -l Změny_změněná_ref.txt || echo "Beze změny"
 echo "======================================"
 echo
 sed -i -e '1iRef '$old' > Ref '$new'\' Změny_změněná_ref.txt
-# TODO:
+# TODO: ungroup ref
 # pokud byly čísla schránek sloučené a nalezen rozdíl, pokusit se rozdělit zpět a vyloučit totožné
 
 
