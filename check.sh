@@ -68,7 +68,8 @@ echo
 sed '1cpsc;zkrnaz_posty;cis_schranky;adresa;sour_x;sour_y;misto_popis;cast_obce;obec;okres;cas;omezeni - omezeni' $old | ./collection_times.sh | sed 's/ @/;/' > tmp_old_CT.csv
 sed '1cpsc;zkrnaz_posty;cis_schranky;adresa;sour_x;sour_y;misto_popis;cast_obce;obec;okres;cas;omezeni - omezeni' $new | ./collection_times.sh | sed 's/ @/;/'  > tmp_new_CT.csv
 
-join -t";" -j 1 <(awk -F";" '{ print $1":"$3";"$11}' tmp_old_CT.csv | sort ) <(awk -F";" '{ print $1":"$3";"$11}' tmp_new_CT.csv | sort) | awk -F";" '$2!=$3' > Změny_doba_výběru.txt
+join -t";" -j 1 <(awk -F";" '{ print $1":"$3";"$11}' tmp_old_CT.csv | sort ) <(awk -F";" '{ print $1":"$3";"$11}' tmp_new_CT.csv | sort) | awk -F";" '$2!=$3' |
+./sort.awk | sed 's/\b1\b/Mo/g;s/\b2\b/Tu/g;s/\b3\b/We/g;s/\b4\b/Th/g;s/\b5\b/Fr/g;s/\b6\b/Sa/g;s/\b7\b/Su/g;s/;@/;/g;s/;\";/;\"/g' > Změny_doba_výběru.txt
 #TODO: parse collection_times
 
 echo "Změna doby výběru schránky:"
