@@ -1,0 +1,1 @@
+awk 'FNR==NR{a[$1]=$2;next} {for(i in a){match($0,i);val=substr($0,RSTART,RLENGTH);if(val){sub(val,a[i])}};print}' repl.txt file.txt > newfile.txt

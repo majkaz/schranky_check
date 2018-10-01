@@ -1,0 +1,18 @@
+# doba vyberu
+awk -F";" ' { 
+
+# vymazat text
+ gsub (/ - [^;]*/,"")
+
+# sloučit, seřadit
+ a[$1":"$3]=a[$1":"$3] ? a[$1":"$3]"#"$12"@"$11 : $12"@"$11
+ } END { 
+ PROCINFO["sorted_in"]="@val_str_asc"
+	for (i in a) {
+		printf i";&"
+		split(a[i],srt,"[#]*") 
+		for (val in srt) 
+			printf "%s",srt[val] (val>1?";":"")
+			printf "&\n"
+	}
+ }' | sed 's/\([-&]\)1\b/\1Mo/g;s/\([-;]\)2\b/\1Tu/g;s/\([-;]\)3\b/\1We/g;s/\([-;]\)4\b/\1Th/g;s/\([-;]\)5\b/\1Fr/g;s/\([-;]\)6\b/\1Sa/g;s/\([-;]\)7\b/\1Su/g;s/&/\"/g;s/@/ /g' | sort -V 
