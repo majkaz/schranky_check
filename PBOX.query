@@ -1,0 +1,3 @@
+area[name="Česko"];
+node[amenity=post_box][ref~"^[0-9][0-9][0-9][0-9][0-9]\:[0-9]+"](area);
+out meta;
