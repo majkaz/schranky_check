@@ -1,0 +1,3 @@
+#!/bin/bash
+# geojson to csv, filter depo
+jq -c '.features[] | [.geometry.coordinates[0],.geometry.coordinates[1],.properties.ref,.properties.collection_times,.properties._note]|@csv' 10.geojson | sed 's/\"//;s/\"$//;s/\\//g;s/<br>/;/g;s/<[^>]*>//g;s/;Poznámka: //;s/Adresa: //;s/\" \+\;/\"/;s/ \"/\"/;1ilon,lat,id,tags\/collection_times,tags\/note' | csvgrep -c id -r "28927:.*" | csvcut -c 1-5,3 | sed '1s/id$/tags\/ref/' > 28927.csv
